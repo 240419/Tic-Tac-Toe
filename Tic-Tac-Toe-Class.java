@@ -4,10 +4,8 @@ import java.io.*;
 
 public class tictactoeexperimental {
   
-  public static void computerThought(ArrayList<Integer> board){
-    ArrayList<ArrayList<Integer>> boardv = new ArrayList<ArrayList<Integer>>();
+  public static void computerThought(ArrayList<ArrayList<Integer>> board){
     ArrayList<Integer> single = new ArrayList<Integer>();
-    
     if ()
     
     
@@ -38,57 +36,85 @@ public class tictactoeexperimental {
     } */
   }
 
-  public static ArrayList<Integer> canWinOpt(int canwin, ArrayList<Integer> board){
+
+  public static ArrayList
+
+  public static ArrayList<ArrayList<Integer>> canWinOpt(int target, ArrayList<ArrayList<Integer>> board, int size){
     ArrayList<Integer> temp = new ArrayList<Integer>();
+    ArrayList<ArrayList<Integer>> finalz = new ArrayList<ArrayList<Integer>>();
     ArrayList<Integer> results = new ArrayList<Integer>();
     int total = 0;
     int iter = 0;
     int RDV = 0;
 
-    //diagonal
-    temp.add(0);
-    temp.add(4);
-    temp.add(8);
-    if((board.get(0) + board.get(4) + board.get(8)) == canwin){
-      return temp;
-    } else {
-      temp.clear();
-    }
-    temp.add(2);
-    temp.add(4);
-    temp.add(6);
-    if((board.get(2) + board.get(4) + board.get(6)) == canwin){
-      return temp;
-    } else {
-      temp.clear();
-    }
-    temp.clear(); // i like over-clearing just to make sure its clean
-    //horizontal
-    for(int x = 0; x < 3; x++){
-      temp.add(x*3);
-      temp.add(x*3+1);
-      temp.add(x*3+2);
-      if((board.get(3*x) + board.get(3*x+1) + board.get(3*x+2)) == canwin){
-        return temp;
-      } else {
+    for (int x = 0; x < size; x++){ // horizontal
+      for (int y = 0; y < size; y++){
+        total += board.get(x).get(y);
+        temp.add(x);
+        temp.add(y);
+        finalz.add(temp);
         temp.clear();
       }
-      temp.clear();
-    }
-
-    for(int x = 0; x < 3; x++){
-      temp.add(x);
-      temp.add(x+3);
-      temp.add(x+6);
-      if((board.get(x) + board.get(x+3) + board.get(x+6)) == canwin){
-        return temp;
+      if (total == target){
+        return finalz;
       } else {
+        finalz.clear();
+      }
+      total = 0;
+      temp.clear();
+      finalz.clear();
+    }
+    for (int x = 0; x < size; x++){ // vertical
+      for (int y = 0; y < size; y++){
+        total += board.get(y).get(x);
+        temp.add(x);
+        temp.add(y);
+        finalz.add(temp);
         temp.clear();
       }
+      if (total == target){
+        return finalz;
+      } else {
+        finalz.clear();
+      }
+      total = 0;
       temp.clear();
+      finalz.clear();
     }
+    for (int x = 0; x < 2; x++){ //diagonal
+      int tempINT_1 = x * size - 1;
+      if (x == 0){
+        for (int y = 0; y < size; y++){
+          total += board.get(y).get(y);
+          temp.add(y);
+          temp.add(y);
+          finalz.add(temp);
+          temp.clear();
+        }
+        if (total == target){
+          return finalz;
+        } else {
+          finalz.clear();
+        }
+      } else {
+        for (int y = size-1; y >= 0; y--){
+          total += board.get(y).get(y);
+          temp.add(y);
+          temp.add(y);
+          finalz.add(temp);
+          temp.clear();
+        }
+        if (total == target){
+          return finalz;
+        } else {
+          finalz.clear();
+        }
+      }
+    }
+    finalz.clear();
     temp.clear();
-    temp.add(2);
-    return temp;
+    temp.add(5);
+    finalz.add(temp);
+    return finalz;
   }
 }
