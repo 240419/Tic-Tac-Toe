@@ -46,10 +46,8 @@ public abstract class TicTacToe {
       
       checkIfConst = true;
       for (int y = 0; y < size; y++){
-        if (target.equals(board.get(y).get(x)){
-          ;
-        } else {
-          checkIfConst = false;
+        if (!target.equals(board.get(y).get(x)){
+          checkIfConst = false; 
         }
       }
       if (checkIfConst){
@@ -61,10 +59,8 @@ public abstract class TicTacToe {
       if (x == 0){
         checkIfConst = true;
         for (int y = 0; y < size; y++){
-          if (target.equals(board.get(y).get(y)){
-            ;
-          } else {
-            checkIfConst = false;
+          if (!target.equals(board.get(y).get(x)){
+            checkIfConst = false; 
           }
         }
         if (checkIfConst){
@@ -72,10 +68,8 @@ public abstract class TicTacToe {
         }
       } else {
         for (int y = size-1; y >= 0; y--){
-          if (target.equals(board.get(y).get(y)){
-            ;
-          } else {
-            checkIfConst = false;
+          if (!target.equals(board.get(y).get(x)){
+            checkIfConst = false; 
           }
         }
         if (checkIfConst){
@@ -83,8 +77,7 @@ public abstract class TicTacToe {
         }
       }
     }
-    false;
-    return finalz;
+    return false;
   }
 
   public static ArrayList<ArrayList<Integer>> canWinOpt(String target, ArrayList<ArrayList<String>> board, int size) {
