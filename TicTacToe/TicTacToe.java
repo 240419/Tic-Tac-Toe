@@ -49,7 +49,7 @@ public abstract class TicTacToe {
         finalz.add(temp);
         temp.clear();
       }
-      if (total == target) {
+      if (checkIfConst) {
         return finalz;
       } else {
         finalz.clear();
@@ -71,7 +71,7 @@ public abstract class TicTacToe {
         finalz.add(temp);
         temp.clear();
       }
-      if (total == target){
+      if (checkIfConst){
         return finalz;
       } else {
         finalz.clear();
@@ -95,7 +95,7 @@ public abstract class TicTacToe {
           finalz.add(temp);
           temp.clear();
         }
-        if (total == target){
+        if (checkIfConst){
           return finalz;
         } else {
           finalz.clear();
