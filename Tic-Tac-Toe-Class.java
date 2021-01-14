@@ -39,17 +39,23 @@ public class tictactoeexperimental {
 
   public static ArrayList
 
-  public static ArrayList<ArrayList<Integer>> canWinOpt(int target, ArrayList<ArrayList<Integer>> board, int size){
+  public static ArrayList<ArrayList<Integer>> canWinOpt(String target, ArrayList<ArrayList<String>> board, int size){
     ArrayList<Integer> temp = new ArrayList<Integer>();
     ArrayList<ArrayList<Integer>> finalz = new ArrayList<ArrayList<Integer>>();
     ArrayList<Integer> results = new ArrayList<Integer>();
     int total = 0;
     int iter = 0;
     int RDV = 0;
+    Boolean checkIfConst = true;
 
     for (int x = 0; x < size; x++){ // horizontal
+      checkIfConst = true;
       for (int y = 0; y < size; y++){
-        total += board.get(x).get(y);
+        if (target.equals(board.get(x).get(y)){
+          total = 0; // just a passive statement
+        } else {
+          checkIfConst = false;
+        }
         temp.add(x);
         temp.add(y);
         finalz.add(temp);
@@ -65,8 +71,13 @@ public class tictactoeexperimental {
       finalz.clear();
     }
     for (int x = 0; x < size; x++){ // vertical
+      checkIfConst = true;
       for (int y = 0; y < size; y++){
-        total += board.get(y).get(x);
+        if (target.equals(board.get(x).get(y)){
+          total = 0; // just a passive statement
+        } else {
+          checkIfConst = false;
+        }
         temp.add(x);
         temp.add(y);
         finalz.add(temp);
@@ -84,8 +95,13 @@ public class tictactoeexperimental {
     for (int x = 0; x < 2; x++){ //diagonal
       int tempINT_1 = x * size - 1;
       if (x == 0){
+        checkIfConst = true;
         for (int y = 0; y < size; y++){
-          total += board.get(y).get(y);
+          if (target.equals(board.get(x).get(y)){
+            total = 0; // just a passive statement
+          } else {
+            checkIfConst = false;
+          }
           temp.add(y);
           temp.add(y);
           finalz.add(temp);
@@ -98,13 +114,17 @@ public class tictactoeexperimental {
         }
       } else {
         for (int y = size-1; y >= 0; y--){
-          total += board.get(y).get(y);
+          if (target.equals(board.get(x).get(y)){
+            total = 0; // just a passive statement
+          } else {
+            checkIfConst = false;
+          }
           temp.add(y);
           temp.add(y);
           finalz.add(temp);
           temp.clear();
         }
-        if (total == target){
+        if (checkIfConst){
           return finalz;
         } else {
           finalz.clear();
