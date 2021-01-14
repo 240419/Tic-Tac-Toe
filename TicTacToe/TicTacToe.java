@@ -4,20 +4,6 @@ import java.util.ArrayList;
 import java.io.*;
 
 public abstract class TicTacToe {
-  public class Main {
-    ArrayList<ArrayList<String>> testProd = new ArrayList<ArrayList<String>>();
-    ArrayList<String> singl = new ArrayList<String>();
-    ArrayList<String> doubl = new ArrayList<String>();
-    ArrayList<String> tripl = new ArrayList<String>();
-    singl.add("h");
-    singl.add("h");
-    singl.add("h");
-    doubl.add("n");
-    int size = 3;
-
-    canWinOpt("h")
-
-  }
   
   public static void computerThought(ArrayList<ArrayList<Integer>> board){
     ArrayList<Integer> single = new ArrayList<Integer>(); 
@@ -39,6 +25,67 @@ public abstract class TicTacToe {
   //       boardv.set(2, single);
   //     }
   //   } */
+  }
+  public static Boolean winOpt(String target, ArrayList<ArrayList<String>> board, int size) {
+    ArrayList<Integer> temp = new ArrayList<Integer>();
+    ArrayList<ArrayList<Integer>> finalz = new ArrayList<ArrayList<Integer>>();
+    Boolean checkIfConst = true;
+
+    for (int x = 0; x < size; x++){ // horizontal
+      checkIfConst = true;
+      for (int y = 0; y < size; y++){
+        if (target.equals(board.get(x).get(y))) {
+          ;
+        } else {
+          checkIfConst = false;
+        }
+      }
+      if (checkIfConst) {
+        return true;
+      }
+    }
+    for (int x = 0; x < size; x++){ // vertical
+      checkIfConst = true;
+      for (int y = 0; y < size; y++){
+        if (target.equals(board.get(x).get(y)){
+          ;
+        } else {
+          checkIfConst = false;
+        }
+      }
+      if (checkIfConst){
+        return true;
+      }
+    }
+    for (int x = 0; x < 2; x++){ //diagonal
+      int tempINT_1 = x * size - 1;
+      if (x == 0){
+        checkIfConst = true;
+        for (int y = 0; y < size; y++){
+          if (target.equals(board.get(y).get(y)){
+            ;
+          } else {
+            checkIfConst = false;
+          }
+        }
+        if (checkIfConst){
+          return true;
+        }
+      } else {
+        for (int y = size-1; y >= 0; y--){
+          if (target.equals(board.get(y).get(y)){
+            ;
+          } else {
+            checkIfConst = false;
+          }
+        }
+        if (checkIfConst){
+          return true;
+        }
+      }
+    }
+    false;
+    return finalz;
   }
 
   public static ArrayList<ArrayList<Integer>> canWinOpt(String target, ArrayList<ArrayList<String>> board, int size) {
