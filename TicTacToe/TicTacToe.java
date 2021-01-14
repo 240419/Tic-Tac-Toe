@@ -43,11 +43,10 @@ public abstract class TicTacToe {
       if (checkIfConst) {
         return true;
       }
-    }
-    for (int x = 0; x < size; x++){ // vertical
+      
       checkIfConst = true;
       for (int y = 0; y < size; y++){
-        if (target.equals(board.get(x).get(y)){
+        if (target.equals(board.get(y).get(x)){
           ;
         } else {
           checkIfConst = false;
