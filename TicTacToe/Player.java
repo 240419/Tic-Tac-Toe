@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
     private static ArrayList<Player> players = new ArrayList<Player>();
+    // id is the player's tag when playing e.g. X or Os
     private String id;
 
     public Player() {

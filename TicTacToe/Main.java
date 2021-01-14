@@ -2,6 +2,8 @@ package TicTacToe;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class Main {
@@ -9,8 +11,12 @@ public class Main {
     private static JMenuBar menuBar;
     private static JMenu fileMenu, deckMenu;
     private static GUI UI;
+    private static ArrayList< ArrayList<Integer> > arr = new ArrayList< ArrayList<Integer> >();
     public static void main(String[] args) {
         initializeFrame();
+        arr.add(new ArrayList<Integer>());
+        arr.get(0).add(9);
+        System.out.println(arr.get(0).get(0));
     }
 
     private static void initializeFrame() {

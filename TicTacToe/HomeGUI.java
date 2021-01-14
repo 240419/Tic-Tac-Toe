@@ -33,8 +33,13 @@ public class HomeGUI extends GUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
         String numOfPeople = numOfPeopleTextField.getText();
         try {
-            for (int i = 0; i < Integer.parseInt(numOfPeople); i++) {
-                new Player(String.valueOf((char) 'A'+i));
+            for (int i = 1; i <= Integer.parseInt(numOfPeople); i++) {
+                String id;
+                String message = "Please what character player #" + i + " would like to use. ";
+                String title = "Character Input";
+                id = JOptionPane.showInputDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+                new Player(id);
+                System.out.println(id);
             }
             this.getPanel().setVisible(false);
         } catch (Exception exception) {
