@@ -31,24 +31,26 @@ public class HomeGUI extends GUI implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-        String numOfPeople = numOfPeopleTextField.getText();
-        try {
-            for (int i = 1; i <= Integer.parseInt(numOfPeople); i++) {
-                String id;
-                String message = "Please what character player #" + i + " would like to use. ";
-                String title = "Character Input";
-                id = JOptionPane.showInputDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
-                new Player(id);
-                System.out.println(id);
-            }
-            this.getPanel().setVisible(false);
-        } catch (Exception exception) {
-            if (numOfPeople.contains("comp")) {
-
-            } else {
-                infoLabel.setText("Please enter a valid char");
+        int numOfPeople = 0;
+        if (!numOfPeopleTextField.getText().toLowerCase().contains("comp") && numOfPeopleTextField.getText().length() > 1) {
+            infoLabel.setText("Please enter a valid char");
+        } else {
+            try {
+                numOfPeople = Integer.parseInt(numOfPeopleTextField.getText());
+            } catch (Exception exception) {
+                new Player();
+                numOfPeople = 1;
+            } finally {
+                for (int i = 1; i <= numOfPeople; i++) {
+                    String id;
+                    String message = "Please what character player #" + i + " would like to use. ";
+                    String title = "Character Input";
+                    id = JOptionPane.showInputDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+                    new Player(id);
+                    System.out.println(id);
+                }
+                this.getPanel().setVisible(false);
             }
         }
-        
     } 
 }

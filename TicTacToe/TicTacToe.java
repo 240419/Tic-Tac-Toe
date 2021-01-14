@@ -26,11 +26,8 @@ public abstract class TicTacToe {
   //     }
   //   } */
   }
-  public static Boolean winOpt(String target, ArrayList<ArrayList<String>> board, int size) {
-    ArrayList<Integer> temp = new ArrayList<Integer>();
-    ArrayList<ArrayList<Integer>> finalz = new ArrayList<ArrayList<Integer>>();
-    Boolean checkIfConst = true;
-
+  public static boolean winOpt(String target, ArrayList<ArrayList<String>> board, int size) {
+    boolean checkIfConst = true;
     for (int x = 0; x < size; x++){ // horizontal
       checkIfConst = true;
       for (int y = 0; y < size; y++){
@@ -45,8 +42,8 @@ public abstract class TicTacToe {
       }
       
       checkIfConst = true;
-      for (int y = 0; y < size; y++){
-        if (!target.equals(board.get(y).get(x))){
+      for (int y = 0; y < size; y++) {
+        if (!target.equals(board.get(y).get(x))) {
           checkIfConst = false; 
         }
       }
@@ -113,7 +110,7 @@ public abstract class TicTacToe {
     for (int x = 0; x < size; x++){ // vertical
       checkIfConst = true;
       for (int y = 0; y < size; y++){
-        if (target.equals(board.get(x).get(y))){
+        if (target.equals(board.get(x).get(y))) {
           total = 0; // just a passive statement
         } else {
           checkIfConst = false;
@@ -132,12 +129,12 @@ public abstract class TicTacToe {
       temp.clear();
       finalz.clear();
     }
-    for (int x = 0; x < 2; x++){ //diagonal
+    for (int x = 0; x < size; x++){ //diagonal
       int tempINT_1 = x * size - 1;
       if (x == 0){
         checkIfConst = true;
         for (int y = 0; y < size; y++){
-          if (target.equals(board.get(x).get(y))){
+          if (target.equals(board.get(x).get(y))) {
             total = 0; // just a passive statement
           } else {
             checkIfConst = false;
@@ -154,7 +151,7 @@ public abstract class TicTacToe {
         }
       } else {
         for (int y = size-1; y >= 0; y--){
-          if (target.equals(board.get(x).get(y))){
+          if (target.equals(board.get(x).get(y))) {
             total = 0; // just a passive statement
           } else {
             checkIfConst = false;
