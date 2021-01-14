@@ -46,7 +46,7 @@ public abstract class TicTacToe {
       
       checkIfConst = true;
       for (int y = 0; y < size; y++){
-        if (!target.equals(board.get(y).get(x)){
+        if (!target.equals(board.get(y).get(x))){
           checkIfConst = false; 
         }
       }
@@ -59,7 +59,7 @@ public abstract class TicTacToe {
       if (x == 0){
         checkIfConst = true;
         for (int y = 0; y < size; y++){
-          if (!target.equals(board.get(y).get(x)){
+          if (!target.equals(board.get(y).get(x))){
             checkIfConst = false; 
           }
         }
@@ -68,7 +68,7 @@ public abstract class TicTacToe {
         }
       } else {
         for (int y = size-1; y >= 0; y--){
-          if (!target.equals(board.get(y).get(x)){
+          if (!target.equals(board.get(y).get(x))){
             checkIfConst = false; 
           }
         }
@@ -114,7 +114,7 @@ public abstract class TicTacToe {
     for (int x = 0; x < size; x++){ // vertical
       checkIfConst = true;
       for (int y = 0; y < size; y++){
-        if (target.equals(board.get(x).get(y)){
+        if (target.equals(board.get(x).get(y))){
           total = 0; // just a passive statement
         } else {
           checkIfConst = false;
@@ -138,7 +138,7 @@ public abstract class TicTacToe {
       if (x == 0){
         checkIfConst = true;
         for (int y = 0; y < size; y++){
-          if (target.equals(board.get(x).get(y)){
+          if (target.equals(board.get(x).get(y))){
             total = 0; // just a passive statement
           } else {
             checkIfConst = false;
@@ -155,7 +155,7 @@ public abstract class TicTacToe {
         }
       } else {
         for (int y = size-1; y >= 0; y--){
-          if (target.equals(board.get(x).get(y)){
+          if (target.equals(board.get(x).get(y))){
             total = 0; // just a passive statement
           } else {
             checkIfConst = false;
