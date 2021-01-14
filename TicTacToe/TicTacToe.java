@@ -66,8 +66,8 @@ public abstract class TicTacToe {
           return true;
         }
       } else {
-        for (int y = size-1; y >= 0; y--){
-          if (!target.equals(board.get(y).get(y))){
+        for (int y = 0; y < size; y++){
+          if (!target.equals(board.get(size-1-y).get(y))){
             checkIfConst = false; 
           }
         }
