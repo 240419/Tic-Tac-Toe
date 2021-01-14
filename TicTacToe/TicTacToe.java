@@ -4,6 +4,20 @@ import java.util.ArrayList;
 import java.io.*;
 
 public abstract class TicTacToe {
+  public class Main {
+    ArrayList<ArrayList<String>> testProd = new ArrayList<ArrayList<String>>();
+    ArrayList<String> singl = new ArrayList<String>();
+    ArrayList<String> doubl = new ArrayList<String>();
+    ArrayList<String> tripl = new ArrayList<String>();
+    singl.add("h");
+    singl.add("h");
+    singl.add("h");
+    doubl.add("n");
+    int size = 3;
+
+    canWinOpt("h")
+
+  }
   
   public static void computerThought(ArrayList<ArrayList<Integer>> board){
     ArrayList<Integer> single = new ArrayList<Integer>(); 
