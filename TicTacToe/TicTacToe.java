@@ -55,11 +55,10 @@ public abstract class TicTacToe {
       }
     }
     for (int x = 0; x < 2; x++){ //diagonal
-      int tempINT_1 = x * size - 1;
+      checkIfConst = true;
       if (x == 0){
-        checkIfConst = true;
         for (int y = 0; y < size; y++){
-          if (!target.equals(board.get(y).get(x))){
+          if (!target.equals(board.get(y).get(y))){
             checkIfConst = false; 
           }
         }
@@ -68,7 +67,7 @@ public abstract class TicTacToe {
         }
       } else {
         for (int y = size-1; y >= 0; y--){
-          if (!target.equals(board.get(y).get(x))){
+          if (!target.equals(board.get(y).get(y))){
             checkIfConst = false; 
           }
         }
