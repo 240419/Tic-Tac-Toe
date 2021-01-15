@@ -41,6 +41,7 @@ public class HomeGUI extends GUI implements ActionListener {
                 new Player();
                 numOfPeople = 1;
             } finally {
+                Player.getPlayers().clear();
                 for (int i = 1; i <= numOfPeople; i++) {
                     String id;
                     String message = "Please what character player #" + i + " would like to use. ";

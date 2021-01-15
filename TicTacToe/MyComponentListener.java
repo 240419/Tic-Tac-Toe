@@ -14,7 +14,7 @@ public class MyComponentListener extends ComponentAdapter {
             break;
 
             default:
-            // Main.setGUI(new ResultGUI());
+            Main.setGUI(new HomeGUI());
             break;
         }
         currentPanel.removeAll();
