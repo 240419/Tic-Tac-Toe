@@ -18,18 +18,19 @@ public class GameGUI extends GUI implements ActionListener {
 
     public GameGUI() {
         super("Game");
+        Main.setMenuVisibility(true);
         guiGrid = new JButton[Player.getPlayers().size()+1][Player.getPlayers().size()+1];
         gameBoard = new ArrayList< ArrayList<String> >();
         turnLabel = new JLabel(String.format("Player #%d's turn (%s) ", 1, Player.getPlayers().get(0).getId()));
         // turnLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
         turnLabel.setPreferredSize(new Dimension(turnLabel.getWidth(), 50));
-        this.getPanel().add(turnLabel);
+        // this.getPanel().add(turnLabel);
         playerTurn = 0;
         int i = 0;
         for (JButton[] row : guiGrid) {
             JPanel newPanel = new JPanel();
             Dimension frameSize = Main.getFrame().getSize();
-            int height = (int) (frameSize.getHeight())/guiGrid.length - 105;
+            int height = (int) (frameSize.getHeight())/guiGrid.length - 25;
             gameBoard.add(new ArrayList<String>());
             int j = 0;
             for (JButton square : row) {

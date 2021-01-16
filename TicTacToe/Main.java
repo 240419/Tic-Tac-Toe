@@ -9,14 +9,11 @@ import javax.swing.*;
 public class Main {
     private static JFrame frame;
     private static JMenuBar menuBar;
-    private static JMenu fileMenu, deckMenu;
+    private static JMenu fileMenu, turnMenu;
     private static GUI UI;
-    private static ArrayList< ArrayList<Integer> > arr = new ArrayList< ArrayList<Integer> >();
     public static void main(String[] args) {
+        initializeMenuBar();
         initializeFrame();
-        arr.add(new ArrayList<Integer>());
-        arr.get(0).add(9);
-        System.out.println(arr.get(0).get(0));
     }
 
     private static void initializeFrame() {
@@ -31,45 +28,36 @@ public class Main {
         frame.setVisible(true);
     }
 
-    // private static void initializeMenuBar() {
-    //     menuBar = new JMenuBar();
-    //     fileMenu = new JMenu("File");
-    //     deckMenu = new JMenu("Deck");
-    //     fileMenu.add(new JMenuItem("Open Log"));
-    //     fileMenu.add(new JMenuItem("New"));
-    //     fileMenu.add(new JMenuItem("Save"));
-    //     deckMenu.add(new JMenuItem("Reshuffle"));
-    //     deckMenu.add(new JMenuItem("Sort Deck"));
-    //     deckMenu.add(new JMenuItem("Show Graphics"));
-    //     deckMenu.add(new JMenuItem("Show as Text"));
-    //     menuBar.add(fileMenu);
-    //     menuBar.add(deckMenu);
+    private static void initializeMenuBar() {
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu("File");
+        turnMenu = new JMenu("Turn Info");
+        fileMenu.add(new JMenuItem("New/Restart"));
+        turnMenu.add(new JMenuItem("Show turns as a notification"));
+        turnMenu.add(new JMenuItem("Show turns as a label"));
+        turnMenu.add(new JMenuItem("Disable turn info completely"));
 
-    //     for (Component menu : menuBar.getComponents()) {
-    //         for (Component item : ((JMenu) menu).getMenuComponents()) {
-    //             item.setName(((JMenuItem) item).getText());
-    //             ((JMenuItem) item).addActionListener(new MyActionListener());
-    //         }
-    //     }
+        menuBar.add(fileMenu);
+        menuBar.add(turnMenu);
 
-    //     System.setProperty("apple.laf.useScreenMenuBar", "true");
-    //     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Stack");
-    // }
+        for (Component menu : menuBar.getComponents()) {
+            for (Component item : ((JMenu) menu).getMenuComponents()) {
+                item.setName(((JMenuItem) item).getText());
+                ((JMenuItem) item).addActionListener(new MyActionListener());
+            }
+        }
 
-    // public static void setMenuVisibility(boolean bool) {
-    //     for (Component menu : menuBar.getComponents()) {
-    //         for (Component item : ((JMenu) menu).getMenuComponents()) {
-    //             ((JMenuItem) item).setEnabled(bool);
-    //         }
-    //     }
-    //     File tempFile = new File(Save.getFileName());
-        
-    //     if (!bool && tempFile.exists()) {
-    //         fileMenu.getMenuComponent(0).setEnabled(true);
-    //     } else if (bool && !tempFile.exists()) {
-    //         fileMenu.getMenuComponent(0).setEnabled(false);
-    //     }
-    // }
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Stack");
+    }
+
+    public static void setMenuVisibility(boolean bool) {
+        for (Component menu : menuBar.getComponents()) {
+            for (Component item : ((JMenu) menu).getMenuComponents()) {
+                ((JMenuItem) item).setEnabled(bool);
+            }
+        }
+    }
 
     public static void setGUI(GUI UI) {
         Main.UI = UI;
