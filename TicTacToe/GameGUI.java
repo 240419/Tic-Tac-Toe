@@ -24,7 +24,7 @@ public class GameGUI extends GUI implements ActionListener {
         turnLabel = new JLabel(String.format("Player #%d's turn (%s) ", 1, Player.getPlayers().get(0).getId()));
         // turnLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
         turnLabel.setPreferredSize(new Dimension(turnLabel.getWidth(), 50));
-        // this.getPanel().add(turnLabel);
+        this.getPanel().add(turnLabel);
         playerTurn = 0;
         int i = 0;
         for (JButton[] row : guiGrid) {
@@ -52,15 +52,29 @@ public class GameGUI extends GUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
         JButton buttonClicked = (JButton) e.getSource();
         String message, title;
+        Player currPlayer;
         
         if (buttonClicked.getText().isEmpty()) {
-            Player player = Player.getPlayers().get(playerTurn % Player.getPlayers().size()); 
+            currPlayer = Player.getPlayers().get(playerTurn % Player.getPlayers().size()); 
             int row = Integer.parseInt(buttonClicked.getName()) / 10;
             int col = Integer.parseInt(buttonClicked.getName()) % 10;
-            buttonClicked.setText(player.getId());
-            gameBoard.get(row).set(col, player.getId());
-            playerTurn = (playerTurn + 1) % Player.getPlayers().size();
-            turnLabel.setText(String.format("Player #%d's turn (%s)", (playerTurn+1), Player.getPlayers().get(playerTurn).getId()));
+            buttonClicked.setText(currPlayer.getId());
+            gameBoard.get(row).set(col, currPlayer.getId());
+
+            playerTurn = (playerTurn+1) % Player.getPlayers().size();
+            currPlayer = Player.getPlayers().get(playerTurn);
+            turnLabel.setText(String.format("Player #%d's turn (%s)", (playerTurn+1), currPlayer.getId()));
+
+            if (currPlayer instanceof Computer) {
+                Computer compPlayer = (Computer) currPlayer;
+                ArrayList<Integer> coordinates = compPlayer.compChoice(compPlayer.getId(), gameBoard);
+                JButton buttonToClick = guiGrid[coordinates.get(0)][coordinates.get(1)];
+                message = "Computer with id \"" + compPlayer.getId() + "\" is taking it's turn";
+                title = "Computer's turn";
+                JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+                buttonToClick.doClick();
+                return;
+            }
         }
 
         for (Player player : Player.getPlayers()) {
@@ -70,6 +84,7 @@ public class GameGUI extends GUI implements ActionListener {
                 title = "Winner!";
                 JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
                 this.getPanel().setVisible(false);
+                return;
             }
         }
 

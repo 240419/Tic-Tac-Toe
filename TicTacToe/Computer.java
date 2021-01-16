@@ -1,19 +1,28 @@
 package TicTacToe;
 
-import java.util.ArrayList;
+import java.util.*;
+
 public class Computer extends Player {
 
   public Computer() {
     // random char goes here
-    super("");
+    super("COMPUTER");
   }
- 
+
   // computer logic & method here
+
   
-  public static ArrayList<Integer> compChoice(String thisComp, ArrayList<String> playersWComps, ArrayList<ArrayList<String>> board) {
+  public ArrayList<Integer> compChoice(String compId, ArrayList<ArrayList<String>> board) {
     boolean checkIfConst = true;
+    ArrayList<String> playersWComps = new ArrayList<String>();
     int size = board.size();
     int sizeP = playersWComps.size();
+    
+    
+    for (Player player : Player.getPlayers()) {
+      playersWComps.add(player.getId());
+    }
+
     int tempIND;
     int blanks = 0;
     ArrayList<ArrayList<Integer>> tBlanks = new ArrayList<ArrayList<Integer>>(); // temporary blanks for win conditions
@@ -21,17 +30,16 @@ public class Computer extends Player {
     ArrayList<Integer> temp = new ArrayList<Integer>();
     ArrayList<Integer> playerCountsOriginalForResize = new ArrayList<Integer>(sizeP);
     ArrayList<Integer> playerCounts = new ArrayList<Integer>(sizeP);
-    for (int x = 0; x < sizeP; x++){
-      if (thisComp.equals(playersWComps.get(x))){
+
+    for (int x = 0; x < sizeP; x++) {
+      if (compId.equals(playersWComps.get(x))){
         int wIM = x; 
       }
     }
-          
     
-    for (int x = 0; x < size; x++){ // horizontal
+    for (int x = 0; x < size; x++) { // horizontal
       blanks = 0;
       temp.clear();
-      playerCounts.clear();
       playerCounts = playerCountsOriginalForResize;
       for (int y = 0; y < size; y++){
         String val = board.get(x).get(y);
@@ -41,10 +49,10 @@ public class Computer extends Player {
           tBlanks.add(temp);
           temp.clear();
         } else {
-          playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
+          playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playersWComps.indexOf(val)) + 1);
         }
       }
-      if ((playerCounts.get(playersWComps.indexOf(thisComp)) == (size - 1)) && (tBlanks.size() == 0)){
+      if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
       }
       for (int counts : playerCounts){
@@ -57,7 +65,6 @@ public class Computer extends Player {
     for (int x = 0; x < size; x++){ // vertical 
       blanks = 0;
       temp.clear();
-      playerCounts.clear();
       playerCounts = playerCountsOriginalForResize;
       for (int y = 0; y < size; y++){
         String val = board.get(y).get(x);
@@ -70,7 +77,7 @@ public class Computer extends Player {
           playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
         }
       }
-      if ((playerCounts.get(playersWComps.indexOf(thisComp)) == (size - 1)) && (tBlanks.size() == 0)){
+      if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
       }
       for (int counts : playerCounts){
@@ -83,7 +90,6 @@ public class Computer extends Player {
     //Diagonal 1
     blanks = 0;
     temp.clear();
-    playerCounts.clear();
     playerCounts = playerCountsOriginalForResize;
     for (int x = 0; x < size; x++){
       String val = board.get(x).get(x);
@@ -95,7 +101,7 @@ public class Computer extends Player {
       } else {
         playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
       }
-      if ((playerCounts.get(playersWComps.indexOf(thisComp)) == (size - 1)) && (tBlanks.size() == 0)){
+      if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
       }
       for (int counts : playerCounts){
@@ -108,7 +114,6 @@ public class Computer extends Player {
     //Diagonal 1
     blanks = 0;
     temp.clear();
-    playerCounts.clear();
     playerCounts = playerCountsOriginalForResize;
     for (int x = 0; x < size; x++){
       String val = board.get(size-1-x).get(x);
@@ -120,7 +125,7 @@ public class Computer extends Player {
       } else {
         playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
       }
-      if ((playerCounts.get(playersWComps.indexOf(thisComp)) == (size - 1)) && (tBlanks.size() == 0)){
+      if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
       }
       for (int counts : playerCounts){

@@ -53,7 +53,6 @@ public class HomeGUI extends GUI implements ActionListener {
 
                 if (id == null) {
                     return;
-
                 } else if (Player.findPlayerIndexByID(id) != -1 || id.isBlank()) {
                     message = "Please enter a valid character that also hasn't been used already!";
                     title = "Invalid input";
@@ -63,6 +62,7 @@ public class HomeGUI extends GUI implements ActionListener {
                     new Player(id);
                 }
             }
+            for (int i = 1; i <= numOfComps; i++) { new Computer(); }
             this.getPanel().setVisible(false);
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
