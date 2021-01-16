@@ -74,7 +74,7 @@ public class Computer extends Player {
           tBlanks.add(temp);
           temp.clear();
         } else {
-          playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
+          playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playersWComps.indexOf(val)) + 1);
         }
       }
       if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
@@ -99,7 +99,7 @@ public class Computer extends Player {
         tBlanks.add(temp);
         temp.clear();
       } else {
-        playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
+        playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playersWComps.indexOf(val)) + 1);
       }
       if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
@@ -123,7 +123,7 @@ public class Computer extends Player {
         tBlanks.add(temp);
         temp.clear();
       } else {
-        playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playerCounts.indexOf(val)) + 1);
+        playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playersWComps.indexOf(val)) + 1);
       }
       if ((playerCounts.get(playersWComps.indexOf(compId)) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
