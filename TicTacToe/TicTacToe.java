@@ -53,27 +53,7 @@ public abstract class TicTacToe {
     return false;
   }
 
-  public static boolean compChoice(String thisComp, ArrayList<String> playersWComps, ArrayList<ArrayList<String>> board) {
-    boolean checkIfConst = true;
-    int size = board.size();
-    int sizeP = playersWComps();
-    int tempIND;
-    ArrayList<String> temp = new ArrayList<String>(sizeP);
-    for (int x = 0; x < sizeP; x++){
-      if (thisComp.equals(playersWComps.get(x)){
-        int wIM = x; 
-      }
-    }
-          
-    
-    for (int x = 0; x < size; x++){ // horizontal
-      for (int y = 0; y < size; y++){
-        String val = board.get(x).get(y);
-        
-      }
-    }
-    
-  }
+  
   
   public static boolean gameOver(ArrayList<ArrayList<String>> board) {
     for (ArrayList<String> row : board) {
