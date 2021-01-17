@@ -27,7 +27,7 @@ public class Computer extends Player {
     }
     int sizeP = playersWComps.size();
     for (int x = 0; x < sizeP; x++){
-      playerCountsOriginalForResize.add(1);
+      playerCountsOriginalForResize.add(0);
     }
 
     ArrayList<Integer> playerCounts = new ArrayList<Integer>();
@@ -91,25 +91,15 @@ public class Computer extends Player {
       }
     }
 
-    temp.clear();
-    for (int x = 0; x < size; x++){
-      for (int y = 0; y < size; y++) {
-        String val = board.get(x).get(y);
-        if (val.isEmpty()){
-          temp.add(size-1-x);
-          temp.add(x);
-          pBlanks.add(temp);
-          temp.clear();
-        }
-      }
-    }
-
     double randomChoice = Math.random();
     for (int x = 0; x < size; x++){
       if ((randomChoice < ((x+1)/size)) && (randomChoice > (x/size))){
         return pBlanks.get(x);
       }
     }
+    temp.clear();
+    temp.add(2);
+    temp.add(2);
     return pBlanks.get(0);
   }
-}d
+}

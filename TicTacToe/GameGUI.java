@@ -38,9 +38,10 @@ public class GameGUI extends GUI implements ActionListener {
                 square.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
                 square.setPreferredSize(new Dimension(height, height));
                 square.addActionListener(this);
-                square.setName(String.valueOf(i*10 + j++));
+                square.setName(String.valueOf(i*10 + j));
                 newPanel.add(square);
                 gameBoard.get(gameBoard.size()-1).add("");
+                guiGrid[i][j++] = square;
             }
             i++;
             this.getPanel().add(newPanel);
@@ -64,16 +65,24 @@ public class GameGUI extends GUI implements ActionListener {
             playerTurn = (playerTurn+1) % Player.getPlayers().size();
             currPlayer = Player.getPlayers().get(playerTurn);
             turnLabel.setText(String.format("Player #%d's turn (%s)", (playerTurn+1), currPlayer.getId()));
-
+            for (Player player : Player.getPlayers()) {
+              if (player.canWin(gameBoard)) {
+                  System.out.println("Win!");
+                  message = "Player #" + (Player.getPlayers().indexOf(player)+1) + " wins!";
+                  title = "Winner!";
+                  JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+                  this.getPanel().setVisible(false);
+                  return;
+              }
+          }
             if (currPlayer instanceof Computer) {
                 Computer compPlayer = (Computer) currPlayer;
                 ArrayList<Integer> coordinates = compPlayer.compChoice(gameBoard);
-                // System.out.println(coordinates.get(0) + " " + coordinates.get(1));
-                // JButton buttonToClick = guiGrid[coordinates.get(0)][coordinates.get(1)];
+                JButton buttonToClick = guiGrid[coordinates.get(0)][coordinates.get(1)];
                 message = "Computer with id \"" + compPlayer.getId() + "\" is taking it's turn";
                 title = "Computer's turn";
                 JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
-                // buttonToClick.doClick();
+                buttonToClick.doClick();
                 return;
             }
         }
