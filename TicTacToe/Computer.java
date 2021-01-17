@@ -15,25 +15,30 @@ public class Computer extends Player {
   public ArrayList<Integer> compChoice(ArrayList<ArrayList<String>> board) {
     ArrayList<String> playersWComps = new ArrayList<String>();
     int size = board.size();
-    int sizeP = playersWComps.size();
     int blanks = 0;
 
     ArrayList<ArrayList<Integer>> tBlanks = new ArrayList<ArrayList<Integer>>(); // temporary blanks for win conditions
     ArrayList<ArrayList<Integer>> pBlanks = new ArrayList<ArrayList<Integer>>(); // permanent blanks for position choosing, kinda redundant but its nice so keep it
     ArrayList<Integer> temp = new ArrayList<Integer>();
-    ArrayList<Integer> playerCountsOriginalForResize = new ArrayList<Integer>(sizeP);
-    ArrayList<Integer> playerCounts = new ArrayList<Integer>(sizeP);
+    ArrayList<Integer> playerCountsOriginalForResize = new ArrayList<Integer>();
 
     for (Player player : Player.getPlayers()) {
       playersWComps.add(player.getId());
     }
+    int sizeP = playersWComps.size();
+    for (int x = 0; x < sizeP; x++){
+      playerCountsOriginalForResize.add(1);
+    }
+
+    ArrayList<Integer> playerCounts = new ArrayList<Integer>();
+    playerCounts = playerCountsOriginalForResize;
+
 
     for (int x = 0; x < sizeP; x++) {
       if (this.getId().equals(playersWComps.get(x))){
         int wIM = x; 
       }
     }
-
     int i = 0;
     for (int x = 0; x < size; x++) { // horizontal
       blanks = 0;
@@ -70,10 +75,11 @@ public class Computer extends Player {
           tBlanks.add(temp);
           temp.clear();
         } else {
-          playerCounts.set(playersWComps.indexOf(val), playerCounts.get(playersWComps.indexOf(val)) + 1);
+          int index = playersWComps.indexOf(val);
+          int contents = playerCounts.get(playersWComps.indexOf(val)) + 1;
+          playerCounts.set(index, contents);
         }
       }
-
       if ((playerCounts.get(playersWComps.indexOf(this.getId())) == (size - 1)) && (tBlanks.size() == 0)){
         return tBlanks.get(0);
       }
