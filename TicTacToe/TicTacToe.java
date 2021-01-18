@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.io.*;
 
 public abstract class TicTacToe {
-  
 
   public static boolean gameOver(ArrayList<ArrayList<String>> board) {
     for (ArrayList<String> row : board) {

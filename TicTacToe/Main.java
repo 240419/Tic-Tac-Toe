@@ -33,8 +33,7 @@ public class Main {
         fileMenu = new JMenu("File");
         turnMenu = new JMenu("Turn Info");
         fileMenu.add(new JMenuItem("New/Restart"));
-        turnMenu.add(new JMenuItem("Show turns as a notification"));
-        turnMenu.add(new JMenuItem("Show turns as a label"));
+        turnMenu.add(new JMenuItem("Show turns as a notifcation"));
         turnMenu.add(new JMenuItem("Disable turn info completely"));
 
         menuBar.add(fileMenu);

@@ -1,36 +1,33 @@
 package TicTacToe;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class GameGUI extends GUI implements ActionListener {
     private JButton[][] guiGrid;
     private ArrayList< ArrayList<String> > gameBoard;
-    private JLabel turnLabel;
     private int playerTurn;
+    private Player currPlayer;
+    public static enum turnInfo {
+        NOTIFICATION,
+        OFF
+    }
+    private turnInfo turnInfoChoice;
 
     public GameGUI() {
         super("Game");
         Main.setMenuVisibility(true);
         guiGrid = new JButton[Player.getPlayers().size()+1][Player.getPlayers().size()+1];
         gameBoard = new ArrayList< ArrayList<String> >();
-        turnLabel = new JLabel(String.format("Player #%d's turn (%s) ", 1, Player.getPlayers().get(0).getId()));
-        // turnLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
-        turnLabel.setPreferredSize(new Dimension(turnLabel.getWidth(), 50));
-        this.getPanel().add(turnLabel);
         playerTurn = 0;
+        currPlayer = Player.getPlayers().get(0);
         int i = 0;
         for (JButton[] row : guiGrid) {
             JPanel newPanel = new JPanel();
             Dimension frameSize = Main.getFrame().getSize();
-            int height = (int) (frameSize.getHeight())/guiGrid.length - 25;
+            int height = (int) (frameSize.getHeight())/guiGrid.length - 30;
             gameBoard.add(new ArrayList<String>());
             int j = 0;
             for (JButton square : row) {
@@ -46,6 +43,8 @@ public class GameGUI extends GUI implements ActionListener {
             i++;
             this.getPanel().add(newPanel);
         }
+        displayTurnNotification();
+        this.setTurnInfoChoice(turnInfo.NOTIFICATION);
         this.setComponentAlignment();
     }
 
@@ -53,7 +52,6 @@ public class GameGUI extends GUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
         JButton buttonClicked = (JButton) e.getSource();
         String message, title;
-        Player currPlayer;
         
         if (buttonClicked.getText().isEmpty()) {
             currPlayer = Player.getPlayers().get(playerTurn % Player.getPlayers().size()); 
@@ -62,48 +60,53 @@ public class GameGUI extends GUI implements ActionListener {
             buttonClicked.setText(currPlayer.getId());
             gameBoard.get(row).set(col, currPlayer.getId());
 
-            playerTurn = (playerTurn+1) % Player.getPlayers().size();
-            currPlayer = Player.getPlayers().get(playerTurn);
-            turnLabel.setText(String.format("Player #%d's turn (%s)", (playerTurn+1), currPlayer.getId()));
-            for (Player player : Player.getPlayers()) {
-              if (player.canWin(gameBoard)) {
-                  System.out.println("Win!");
-                  message = "Player #" + (Player.getPlayers().indexOf(player)+1) + " wins!";
-                  title = "Winner!";
-                  JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
-                  this.getPanel().setVisible(false);
-                  return;
-              }
-          }
-            if (currPlayer instanceof Computer) {
-                Computer compPlayer = (Computer) currPlayer;
-                ArrayList<Integer> coordinates = compPlayer.compChoice(gameBoard);
-                JButton buttonToClick = guiGrid[coordinates.get(0)][coordinates.get(1)];
-                message = "Computer with id \"" + compPlayer.getId() + "\" is taking it's turn";
-                title = "Computer's turn";
-                JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
-                buttonToClick.doClick();
-                return;
-            }
-        }
-
-        for (Player player : Player.getPlayers()) {
-            if (player.canWin(gameBoard)) {
+            if (currPlayer.canWin(gameBoard)) {
                 System.out.println("Win!");
-                message = "Player #" + (Player.getPlayers().indexOf(player)+1) + " wins!";
+                message = "Player #" + (Player.getPlayers().indexOf(currPlayer)+1) + " wins!";
                 title = "Winner!";
                 JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
                 this.getPanel().setVisible(false);
-                return;
+              //   return;
+
+            } else if (TicTacToe.gameOver(gameBoard)) {
+                message = "Sorry, nobody won the game :(";
+                title = "Game Over";
+                JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+                this.getPanel().setVisible(false);
+
+            } else {
+                playerTurn = (playerTurn+1) % Player.getPlayers().size();
+                currPlayer = Player.getPlayers().get(playerTurn);
+
+                if (turnInfoChoice == turnInfo.NOTIFICATION) { displayTurnNotification(); }
+
+                if (currPlayer instanceof Computer) {
+                    ArrayList<Integer> coordinates = ((Computer) currPlayer).compChoice(gameBoard);
+                    JButton buttonToClick = guiGrid[coordinates.get(0)][coordinates.get(1)];
+                    buttonToClick.doClick();
+                }
             }
         }
-
-        if (TicTacToe.gameOver(gameBoard)) {
-            message = "Sorry, nobody won the game :(";
-            title = "Game Over";
-            JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
-            this.getPanel().setVisible(false);
-        }
     } 
+
+    private void displayTurnNotification() {
+        String message, title;
+        if (currPlayer instanceof Computer) {
+            message = "Computer with id \"" + currPlayer.getId() + "\" is taking it's turn";
+            title = "Computer's turn";
+        } else {
+            message = String.format("It's now player #%d's turn (%s)", (playerTurn+1), currPlayer.getId());
+            title = "Next player's turn";
+        }
+        JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+    }
+
+    public turnInfo getTurnInfoChoice() {
+        return this.turnInfoChoice;
+    }
+
+    public void setTurnInfoChoice(turnInfo turnInfoChoice) {
+        this.turnInfoChoice = turnInfoChoice;
+    }
     
 }
