@@ -7,7 +7,7 @@ import java.util.*;
 
 public class GameGUI extends GUI implements ActionListener {
     private JButton[][] guiGrid;
-    private ArrayList< ArrayList<String> > gameBoard;
+    private static ArrayList< ArrayList<String> > gameBoard;
     private int playerTurn;
     private Player currPlayer;
     public static enum turnInfo {
@@ -60,15 +60,14 @@ public class GameGUI extends GUI implements ActionListener {
             buttonClicked.setText(currPlayer.getId());
             gameBoard.get(row).set(col, currPlayer.getId());
 
-            if (currPlayer.canWin(gameBoard)) {
+            if (currPlayer.wonGame(gameBoard)) {
                 System.out.println("Win!");
                 message = "Player #" + (Player.getPlayers().indexOf(currPlayer)+1) + " wins!";
                 title = "Winner!";
                 JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
                 this.getPanel().setVisible(false);
-              //   return;
 
-            } else if (TicTacToe.gameOver(gameBoard)) {
+            } else if (gameOver()) {
                 message = "Sorry, nobody won the game :(";
                 title = "Game Over";
                 JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
@@ -100,6 +99,17 @@ public class GameGUI extends GUI implements ActionListener {
         }
         JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
     }
+
+    private boolean gameOver() {
+        for (ArrayList<String> row : gameBoard) {
+          for (String square : row) {
+            if (square.isEmpty()) {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
 
     public turnInfo getTurnInfoChoice() {
         return this.turnInfoChoice;

@@ -41,6 +41,10 @@ public class GUI {
         panel.setName(panelName);
     }
 
+    public void test(int... i) {
+        
+    }
+
     public void setComponentAlignment() {
         for (Component component : panel.getComponents()) {
             if (component instanceof JLabel) {
