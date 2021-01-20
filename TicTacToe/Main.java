@@ -1,9 +1,6 @@
 package TicTacToe;
 
 import java.awt.*;
-import java.io.*;
-import java.util.ArrayList;
-
 import javax.swing.*;
 
 public class Main {

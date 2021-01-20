@@ -49,4 +49,8 @@ public class Computer extends Player {
     }
     return null;
   }
+
+  public static void setNumOfComputers(int numOfComputers) {
+    Computer.numOfComputers = numOfComputers;
+  }
 }

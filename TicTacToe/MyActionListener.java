@@ -3,7 +3,6 @@ package TicTacToe;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
 
 public class MyActionListener extends AbstractAction {
   private static final long serialVersionUID = 1L;

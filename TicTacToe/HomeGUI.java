@@ -36,13 +36,14 @@ public class HomeGUI extends GUI implements ActionListener {
         int numOfPeople = 0, numOfComps = 0;
         String message = "Please enter a valid number of players/computers.", title = "Invalid Input";
         Player.getPlayers().clear();
+        Computer.setNumOfComputers(0);
         try {
             numOfPeople = Integer.parseInt(numOfPeopleTextField.getText());
             numOfComps = Integer.parseInt(numOfCompsTextField.getText());
             if (numOfPeople < 0 || numOfComps < 0 || (numOfPeople + numOfComps) > 10) {
                 message = "Please enter a valid number of players/computers. The total number of players must be less than 10!";
                 title = "Invalid input";
-                throw new Exception();
+                JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
             }
             for (int i = 1; i <= numOfPeople; i++) {
                 String id;
@@ -52,11 +53,11 @@ public class HomeGUI extends GUI implements ActionListener {
 
                 if (id == null) {
                     return;
-                } else if (Player.findPlayerIndexByID(id) != -1 || id.isBlank()) {
-                    message = "Please enter a valid character that also hasn't been used already!";
+                } else if (!Player.isValidChar(id)) {
+                    message = "Please enter a valid letter that also hasn't been used already!";
                     title = "Invalid input";
                     i--;
-                    throw new Exception();
+                    JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
                 } else {
                     new Player(id);
                 }
@@ -64,7 +65,7 @@ public class HomeGUI extends GUI implements ActionListener {
             for (int i = 1; i <= numOfComps; i++) { new Computer(); }
             this.getPanel().setVisible(false);
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+            exception.printStackTrace();
         }
     }
 }
