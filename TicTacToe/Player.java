@@ -143,7 +143,7 @@ public class Player {
   }
 
   public static boolean isValidChar(String tempId) {
-    if (Player.findPlayerIndexByID(tempId) != -1 || tempId.isBlank() || tempId.length() == 1) {
+    if (Player.findPlayerIndexByID(tempId) == -1 && tempId.length() == 1) {
       if (Character.isLetter(tempId.toCharArray()[0])) {
         return true;
       }

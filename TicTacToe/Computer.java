@@ -12,23 +12,18 @@ public class Computer extends Player {
   public ArrayList<Integer> compChoice(ArrayList<ArrayList<String>> board) {
       // winning move available
     if (this.aboutToWin(board, 1) != null) {
-      System.out.println("WINNING MOVE");
-      System.out.println(this.aboutToWin(board, 1).get(0) + " " + this.aboutToWin(board, 1).get(1));
       return this.aboutToWin(board, 1);
 
       // threat winning pay
     } else if (playerCanWin(board) != null) {
-      System.out.println("THREAT");
       return playerCanWin(board);
 
       // center square 
     } else if (board.size() % 2 == 1 && board.get(board.size()/2).get(board.size()/2).isEmpty()) {
-      System.out.println("CENTER SQUARE");
       return new ArrayList<Integer>(Arrays.asList(board.size()/2, board.size()/2));
       
       // random
     } else {
-      System.out.println("RANDOM SQUARE");
       Random rand = new Random();
       String text = "temp";
       int r1 = 0, r2 = 0;

@@ -34,16 +34,15 @@ public class HomeGUI extends GUI implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
         int numOfPeople = 0, numOfComps = 0;
-        String message = "Please enter a valid number of players/computers.", title = "Invalid Input";
         Player.getPlayers().clear();
         Computer.setNumOfComputers(0);
+        String message = "Please enter a valid number of players/computers. The total number of players must be less than 10!";
+        String title = "Invalid input";
         try {
             numOfPeople = Integer.parseInt(numOfPeopleTextField.getText());
             numOfComps = Integer.parseInt(numOfCompsTextField.getText());
             if (numOfPeople < 0 || numOfComps < 0 || (numOfPeople + numOfComps) > 10) {
-                message = "Please enter a valid number of players/computers. The total number of players must be less than 10!";
-                title = "Invalid input";
-                JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
+                throw new Exception();
             }
             for (int i = 1; i <= numOfPeople; i++) {
                 String id;
@@ -65,7 +64,7 @@ public class HomeGUI extends GUI implements ActionListener {
             for (int i = 1; i <= numOfComps; i++) { new Computer(); }
             this.getPanel().setVisible(false);
         } catch (Exception exception) {
-            exception.printStackTrace();
+            JOptionPane.showMessageDialog(Main.getFrame(), message, title, JOptionPane.OK_OPTION);
         }
     }
 }
